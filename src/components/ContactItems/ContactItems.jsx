@@ -7,7 +7,7 @@ export const ContactItems = ({ item: { id, name, number } }) => {
   const dispatch = useDispatch();
 
   const handleDelete = () => dispatch(deleteContact(id));
-  
+
   return (
     <>
       <Item>
@@ -22,4 +22,4 @@ ContactItems.propTypes = {
   id: PropTypes.string,
   name: PropTypes.string,
   number: PropTypes.number.isRequired,
-}.isRequired
+}.isRequired;

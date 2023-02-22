@@ -12,12 +12,7 @@ export const ContactList = () => {
       {contacts.map(contact => (
         <Contact key={contact.id}>
           <GiRotaryPhone />
-          <ContactItems
-            // id={contact.id}
-            // name={contact.name}
-            // number={contact.number}
-            item={contact}
-          />
+          <ContactItems item={contact} />
         </Contact>
       ))}
     </List>
