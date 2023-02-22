@@ -7,7 +7,9 @@ import {
 } from './ContactForm.styled';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {addContacts} from '../../redux/contactsSlice';
+import {getContacts} from '../../redux/selectors';
 
 const FormError = ({ name }) => {
   return (
@@ -18,14 +20,20 @@ const FormError = ({ name }) => {
   );
 };
 
-export const ContactForm = ({ onSubmit }) => {
+export const ContactForm = () => {
  
+  const dispatch = useDispatch();
+  const listContacts = useSelector(getContacts);
   const submitForm = (values, { resetForm }) => {
-    const { name, number } = values;
-    const dataContact = { name, number };
-    
+    if(listContacts.some(item=>item.name === values.name)){
+      alert('This contact has already been added.')
+      return
+    }
+
+    dispatch(addContacts(values))
+      
     resetForm();
-    onSubmit(dataContact);
+   
   };
 
   const nameInputId = nanoid();
@@ -39,7 +47,7 @@ export const ContactForm = ({ onSubmit }) => {
       }}
       onSubmit={submitForm}
     >
-      <Form autoComplete="off">
+      <Form >
         <FormAddContacts>
           <Label htmlFor={nameInputId}>
             Name
