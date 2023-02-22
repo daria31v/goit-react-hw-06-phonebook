@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import {
   AddContactBtn,
   Label,
@@ -8,8 +7,8 @@ import {
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import {addContacts} from '../../redux/contactsSlice';
-import {getContacts} from '../../redux/selectors';
+import { addContacts } from '../../redux/contactsSlice';
+import { getContacts } from '../../redux/selectors';
 
 const FormError = ({ name }) => {
   return (
@@ -21,19 +20,17 @@ const FormError = ({ name }) => {
 };
 
 export const ContactForm = () => {
- 
   const dispatch = useDispatch();
   const listContacts = useSelector(getContacts);
+
   const submitForm = (values, { resetForm }) => {
-    if(listContacts.some(item=>item.name === values.name)){
-      alert('This contact has already been added.')
-      return
+    if (listContacts.some(item => item.name === values.name)) {
+      alert('This contact has already been added.');
+      return;
     }
 
-    dispatch(addContacts(values))
-      
+    dispatch(addContacts(values));
     resetForm();
-   
   };
 
   const nameInputId = nanoid();
@@ -47,7 +44,7 @@ export const ContactForm = () => {
       }}
       onSubmit={submitForm}
     >
-      <Form >
+      <Form>
         <FormAddContacts>
           <Label htmlFor={nameInputId}>
             Name
@@ -83,12 +80,3 @@ export const ContactForm = () => {
     </Formik>
   );
 };
-
-
-ContactForm.propTypes = {
-  value: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    number: PropTypes.number.isRequired,
-  }),
-  onSubmit: PropTypes.func.isRequired,
-}.isRequired;

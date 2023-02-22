@@ -1,4 +1,4 @@
-@import-normalize;
+/* @import-normalize; */
 
 body {
   margin: 0;
@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(31deg, #cca4a4, #72759c);
+  background: linear-gradient(31deg, #837272, #f4bc05);
   background-size: cover;
 }
 
